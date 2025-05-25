@@ -1,8 +1,6 @@
 body {
     background: #0f111b;
-    /* Daha qaranlıq, amma soyuq */
     color: #e0e6f1;
-    /* Açıq, sərin mavi */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
@@ -17,104 +15,64 @@ body {
     padding: 10px 0;
 }
 
-/* === Coin Card === */
 .coin-card {
     position: relative;
     background: linear-gradient(135deg, #1b2735, #121b27);
     border-radius: 14px;
     padding: 20px 24px;
-    box-shadow:
-        0 0 14px rgba(16, 213, 255, 0.7),
-        inset 0 0 10px #10d5ff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 14px rgba(16, 213, 255, 0.7), inset 0 0 10px #10d5ff;
+    transition: all 0.4s ease;
     cursor: pointer;
     overflow: hidden;
     border: 1.5px solid transparent;
     color: #dbe9ff;
-    user-select: none;
-}
 
-.coin-card:hover {
-    transform: translateY(-8px);
-    box-shadow:
-        0 0 36px #10d5ff,
-        inset 0 0 14px #00f0ff;
-    border-color: #00f0ff;
-    z-index: 10;
-}
-
-/* Glow animasiyası coin card arxa fonunda */
-.coin-card::before {
-    content: "";
-    position: absolute;
-    top: -70%;
-    left: -70%;
-    width: 240%;
-    height: 240%;
-    background: linear-gradient(60deg, #00f0ff, #00d4ff, #0055ff, #00aaff);
-    filter: blur(40px);
-    opacity: 0.4;
-    animation: rotateGlow 8s linear infinite;
-    z-index: 0;
-    transition: opacity 0.35s ease;
-    border-radius: 60%;
-}
-
-.coin-card:hover::before {
-    opacity: 0.7;
-}
-
-@keyframes rotateGlow {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 0 36px #10d5ff, inset 0 0 14px #00f0ff;
+        border-color: #00f0ff;
     }
 }
 
-/* Coin header: şəkil və info */
 .coin-header {
     display: flex;
     gap: 16px;
     align-items: center;
     position: relative;
     z-index: 1;
+
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid #00d4ff;
+        box-shadow: 0 0 14px #00d4ff;
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 0 22px #00f0ff;
+    }
+
+    h3 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: #dbe9ff;
+        user-select: text;
+
+        span {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #70c5ff;
+            margin-left: 8px;
+            font-style: italic;
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 0 22px #00f0ff;
+    }
+
 }
 
-/* Coin şəkli */
-.coin-header img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 3px solid #00d4ff;
-    box-shadow: 0 0 14px #00d4ff;
-    transition: box-shadow 0.3s ease;
-}
-
-.coin-card:hover .coin-header img {
-    box-shadow: 0 0 22px #00f0ff;
-}
-
-/* Coin adı və simvolu */
-.coin-header h3 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #dbe9ff;
-    user-select: text;
-}
-
-.coin-header h3 span {
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: #70c5ff;
-    margin-left: 8px;
-    font-style: italic;
-}
-
-/* Qiymət */
 .coin-price {
     margin-top: 8px;
     font-weight: 700;
@@ -124,7 +82,6 @@ body {
     text-shadow: 0 0 6px #00e5ff99;
 }
 
-/* Qiymət dəyişikliyi */
 .coin-change {
     margin-top: 6px;
     font-weight: 700;
@@ -137,47 +94,28 @@ body {
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Ox ikonları üçün xüsusi stil */
 .coin-change.up {
     color: #32d74b;
-    /* Neon yaşıl */
     text-shadow: 0 0 14px #32d74b;
+
+    &::before {
+        border-color: #32d74b;
+        transform: rotate(-45deg);
+        box-shadow: 0 0 12px #32d74b;
+    }
 }
 
 .coin-change.down {
     color: #ff453a;
-    /* Neon qırmızı */
     text-shadow: 0 0 14px #ff453a;
+
+    &::before {
+        border-color: #ff453a;
+        transform: rotate(135deg);
+        box-shadow: 0 0 12px #ff453a;
+    }
 }
 
-/* Oxları daha görünən etmək üçün */
-.coin-change.up::before,
-.coin-change.down::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-style: solid;
-    border-width: 0 3px 3px 0;
-    padding: 3px;
-    transform: rotate(45deg);
-    margin-right: 6px;
-    box-shadow: 0 0 8px;
-}
-
-.coin-change.up::before {
-    border-color: #32d74b;
-    transform: rotate(-45deg);
-    box-shadow: 0 0 12px #32d74b;
-}
-
-.coin-change.down::before {
-    border-color: #ff453a;
-    transform: rotate(135deg);
-    box-shadow: 0 0 12px #ff453a;
-}
-
-/* === Price Chart konteyner === */
 .chart-container {
     position: relative;
     width: 100%;
@@ -190,7 +128,6 @@ body {
     background: linear-gradient(90deg, #00cfff22, #0077cc33);
 }
 
-/* === Search Bar === */
 .search-bar {
     width: 100%;
     padding: 16px 24px;
@@ -205,21 +142,21 @@ body {
     outline: none;
     user-select: text;
     margin-bottom: 24px;
+
+    &::placeholder {
+        color: #7aaecf;
+        font-weight: 500;
+    }
+
+    &:focus {
+        border-color: #32d74b;
+        box-shadow: 0 0 20px #32d74b;
+        background: #10322f;
+        color: #b8f5bc;
+    }
 }
 
-.search-bar::placeholder {
-    color: #7aaecf;
-    font-weight: 500;
-}
 
-.search-bar:focus {
-    border-color: #32d74b;
-    box-shadow: 0 0 20px #32d74b;
-    background: #10322f;
-    color: #b8f5bc;
-}
-
-/* === Loader === */
 .loader {
     color: #00e5ff;
     font-weight: 700;
@@ -228,34 +165,6 @@ body {
     padding: 20px;
     user-select: none;
     text-shadow: 0 0 12px #00cfff;
-    animation: pulseGlow 2.7s infinite ease-in-out;
-}
-
-@keyframes pulseGlow {
-
-    0%,
-    100% {
-        text-shadow: 0 0 12px #00cfff;
-        color: #00e5ff;
-    }
-
-    50% {
-        text-shadow: 0 0 28px #32d74b;
-        color: #32d74b;
-    }
-}
-
-.error-message {
-    background: #8b1f1f;
-    color: #ffd7d7;
-    font-weight: 700;
-    font-size: 1.25rem;
-    padding: 18px 26px;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: 0 0 18px #ff453a;
-    user-select: none;
-    margin-top: 20px;
 }
 
 .theme-toggle {
@@ -266,16 +175,15 @@ body {
     padding: 12px 20px;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-    user-select: none;
+    transition: all 0.4s ease;
     box-shadow: 0 0 16px #00d4ff;
     margin-bottom: 16px;
-}
 
-.theme-toggle:hover {
-    background: #32d74b;
-    color: #102210;
-    box-shadow: 0 0 28px #32d74b;
+    &:hover {
+        background: #32d74b;
+        color: #102210;
+        box-shadow: 0 0 28px #32d74b;
+    }
 }
 
 
@@ -283,7 +191,8 @@ body {
     .coin-list {
         grid-template-columns: 1fr;
     }
-    .search-bar{
+
+    .search-bar {
         width: 70%;
     }
 }
@@ -292,7 +201,8 @@ body {
     .coin-list {
         grid-template-columns: 1fr 1fr;
     }
-    .search-bar{
+
+    .search-bar {
         width: 95%;
     }
 }
